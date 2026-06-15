@@ -25,14 +25,17 @@ Lightweight C++17 logging library with ANSI color support.
 
 ### Stream Operators
 
-`ImLogOut` extends `std::ostringstream` and supports `operator<<` for `ImLogColor` and `ImLogBackGroundColor`.
+`LogOut` extends `std::ostringstream` and supports `operator<<` for `LogColor` and `LogBackGroundColor`.
 
 ### Configuration
-
 ```cpp
-ImLog::API::stream = &std::cout;           // default
-ImLog::API::assertFunc = [](bool) { ... }; // default: assert()
+Log::API::stream
+``` 
+This is used to set output stream for the logger by default it is std::out, you can give any `std::ostream` to output to. like a builtin logger in an app for debugging
+```cpp
+Log::API::assertFunc = [](bool) { ... }; // default: assert()
 ```
+This is used to give control for assert handling in apps
 
 ## Build
 
