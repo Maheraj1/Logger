@@ -5,7 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace ImLog {
+namespace Log {
 
     std::ostream* API::stream = &std::cout;
     std::function<void(bool)> API::assertFunc = [](bool condition) { assert(condition); };
@@ -23,7 +23,7 @@ namespace ImLog {
     }
 
 
-    void Log(ImLogOut& buffer) {
+    void Log(LogOut& buffer) {
         Log(buffer.str());
     }
     
@@ -32,34 +32,34 @@ namespace ImLog {
     }
 
     void Error(std::string text, std::string errorType, bool Assert) {
-        std::string statment = '(' + errorType + "): " + text + "\n";
+        std::string statement = '(' + errorType + "): " + text + "\n";
 
         if (Assert)
 		{
-            ImLog::Assert(false, statment);
+            Log::Assert(false, statement);
         } else {
-            ImLog::Log("\e[" + std::to_string((int)ImLogColor::Red) + statment);
+            Log::Log("\e[" + std::to_string((int)LogColor::Red) + statement);
         }
     }
 
     void Assert(bool condition, std::string text) {
         if (!text.empty()) {
-            ImLogOut out;
-            out << ImLogColor::Red << text;
+            LogOut out;
+            out << LogColor::Red << text;
         }
 
         API::assertFunc(false);
     }
 
     void Info(std::string text, std::string from) {
-        Log("\e[" + std::to_string((int)ImLogColor::Green) + '(' + from + "): " + text + '\n');
+        Log("\e[" + std::to_string((int)LogColor::Green) + '(' + from + "): " + text + '\n');
     }
 
     void Warning(std::string text) {
-        Log("\e[" + std::to_string((int)ImLogColor::Green) + "(Warning): " + text + '\n');
+        Log("\e[" + std::to_string((int)LogColor::Green) + "(Warning): " + text + '\n');
     }
 
-    ImLogOut::ImLogOut(std::string str) 
+    LogOut::LogOut(std::string str) 
     :std::ostringstream(str)
     { }
 }

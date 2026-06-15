@@ -1,6 +1,6 @@
 /**
- NOTE: You are supposed to add "\n" in the log (Helper Functions i.e. Error, Info and Warning as an exeption)
- NOTE: Define macro `IMLOG_DISABLE` to disable all functions
+ NOTE: You are supposed to add "\n" in the log (Helper Functions i.e. Error, Info and Warning add it automatically)
+ NOTE: Define macro `LOG_DISABLE` to disable all functions
 */
 
 #pragma once
@@ -11,17 +11,17 @@
 #include <sstream>
 #include <string>
 
-#define ImLog_Log   ImLog::Log
-#define ImLog_Error ImLog::Error
-#define ImLog_Info ImLog::Info
-#define ImLog_Warning ImLog::Warning
+#define Log_Log   Log::Log
+#define Log_Error Log::Error
+#define Log_Info Log::Info
+#define Log_Warning Log::Warning
 
-namespace ImLog
+namespace Log
 {
     /**
      * @brief Enum with number for colored text output
      */
-    enum class ImLogColor: int
+    enum class LogColor: int
     {
         None           = 0,
         Black          = 30,
@@ -45,7 +45,7 @@ namespace ImLog
     /**
      * @brief Enum with number for colored background text output
      */
-    enum class ImLogBackGroundColor: int
+    enum class LogBackGroundColor: int
     {
         None           = 0,
         Black          = 40,
@@ -66,17 +66,17 @@ namespace ImLog
         BrightWhite    = 107,
     };
 
-	class ImLogOut: public std::ostringstream {
+	class LogOut: public std::ostringstream {
 		public:
-            ImLogOut() = default;
-            ImLogOut(std::string str);
+            LogOut() = default;
+            LogOut(std::string str);
 
-			ImLogOut& operator<<(ImLogColor color) {
+			LogOut& operator<<(LogColor color) {
 				*this << "\e[" << (int)color << 'm';
 				return *this;
 			}
 
-			ImLogOut& operator<<(ImLogBackGroundColor color) {
+			LogOut& operator<<(LogBackGroundColor color) {
 				*this << "\e[" << (int)color << 'm';
 				return *this;
 			}
@@ -113,7 +113,7 @@ namespace ImLog
         * 
         * @param buffer 
     */
-    void Log(ImLogOut& buffer);
+    void Log(LogOut& buffer);
 
     /**
         * @brief Method to Assert in Debug Build

@@ -5,11 +5,11 @@ Lightweight C++17 logging library with ANSI color support.
 ## Features
 
 - Printf-style and string logging via `Log()`
-- Colored output using `ImLogColor` and `ImLogBackGroundColor` enums
+- Colored output using `LogColor` and `LogBackGroundColor` enums
 - Helper functions: `Info()`, `Warning()`, `Error()`
 - Assert support with customizable handler
 - Configurable output stream via `API::stream`
-- Disable all logging by defining `IMLOG_DISABLE`
+- Disable all logging by defining `LOG_DISABLE`
 
 ## API Overview
 
@@ -17,7 +17,7 @@ Lightweight C++17 logging library with ANSI color support.
 |---|---|
 | `Log(const char* fmt, ...)` | Printf-style formatted log |
 | `Log(std::string text)` | String log |
-| `Log(ImLogOut& buffer)` | Log from custom output buffer |
+| `Log(LogOut& buffer)` | Log from custom output buffer |
 | `Info(text, from)` | Green info log |
 | `Error(text, errorType, assert)` | Red error log |
 | `Warning(text)` | Warning log |
@@ -38,6 +38,6 @@ ImLog::API::assertFunc = [](bool) { ... }; // default: assert()
 
 ```sh
 mkdir build && cd build
-cmake ..
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 make
 ```
