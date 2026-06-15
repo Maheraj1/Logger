@@ -1,4 +1,4 @@
-# SLogger
+# Logger
 
 Lightweight C++17 logging library with ANSI color support.
 
